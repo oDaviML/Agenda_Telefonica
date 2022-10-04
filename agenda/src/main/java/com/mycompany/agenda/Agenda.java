@@ -1,17 +1,37 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
- */
-
 package com.mycompany.agenda;
+import java.util.Scanner;
 
-/**
- *
- * @author aluno
- */
 public class Agenda {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        System.out.println("Selecione a operação:");
+        System.out.println("Adicionar - AD");
+        System.out.println("Excluir - EX");
+        System.out.println("Atualizar - AT");
+        System.out.println("Listar - LT");
+
+        String op;
+        Scanner input = new Scanner(System.in);
+
+        op = input.next();
+
+        switch (op) {
+            case "AD":
+                System.out.println("Selecionado Adicionar");
+                break;
+            case "EX":
+                System.out.println("Selecionado Exlcuir");
+                break;
+            case "AT":
+                System.out.println("Selecionado Atualizar");
+                break;
+            case "LT":
+                System.out.println("Selecionado Listar");
+                break;
+            default:
+                System.out.println("Inválido");
+                break;
+        }
+        
     }
 }
