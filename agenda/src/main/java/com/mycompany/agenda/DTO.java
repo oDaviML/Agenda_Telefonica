@@ -26,4 +26,14 @@ public class DTO {
         this.telefone = telefone;
     }
 
+    public Integer getCodigo() {
+        return codigo;
+    }
+    public String getNome() {
+        return nome;
+    }
+    public Integer getTelefone() {
+        return telefone;
+    }
+    
 }
