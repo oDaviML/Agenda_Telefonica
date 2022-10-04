@@ -17,7 +17,8 @@ public class Agenda {
 
         switch (op) {
             case "AD":
-                System.out.println("Selecionado Adicionar");
+                System.out.println("Insira");
+
                 break;
             case "EX":
                 System.out.println("Selecionado Exlcuir");
