@@ -32,6 +32,7 @@ public class AgendaInterface implements Initializable {
         String numero = numeroID.getText();
         String tipo = tipoSelect.getValue();
         System.out.println(nome + " " + numero + " " + tipo);
+        Service.AdicionarContato(nome, numero, tipo);
     }
 
     @Override
