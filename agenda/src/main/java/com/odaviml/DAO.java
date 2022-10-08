@@ -3,8 +3,12 @@ package com.odaviml;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class DAO{
     
+    private static ObservableList<DTO> observableListClientes;
     private static List<DTO> contatoLista;
     private static int codigo;
     static {
@@ -16,17 +20,22 @@ public class DAO{
         DTO contato = new DTO(codigo, nome, telefone, tipo);
         contatoLista.add(contato);
         codigo++;
+        observableListClientes = FXCollections.observableArrayList(contatoLista);
         return contato;
     }
 
-    public void removerContato(Integer codigo) {
+    public void removerContato(int codigo) {
         if (contatoLista.contains(codigo)) {
             contatoLista.remove(codigo);
         }
         
     }
 
-    public void atualizarContato(Integer cod) {
-        //A implementar
+    public static ObservableList<DTO> getObservableListClientes() {
+        return observableListClientes;
+    }
+
+    public static List<DTO> getContatoLista() {
+        return contatoLista;
     }
 }

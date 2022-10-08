@@ -2,18 +2,18 @@ package com.odaviml;
 
 public class DTO {
     private String nome, telefone, tipo;
-    private Integer codigo;
+    private int codigo;
 
 
 
-    public DTO(Integer codigo, String nome, String telefone, String tipo) {
+    public DTO(int codigo, String nome, String telefone, String tipo) {
         this.codigo = codigo;
         this.nome = nome;
         this.telefone = telefone;
         this.tipo = tipo;
     }
 
-    public void setCodigo(Integer codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
@@ -29,11 +29,7 @@ public class DTO {
         this.tipo = tipo;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
-
-    public Integer getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
     public String getNome() {
@@ -41,6 +37,15 @@ public class DTO {
     }
     public String getTelefone() {
         return telefone;
+    }
+    public String getTipo() {
+        return tipo;
+    }
+
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return " " + getCodigo() + " " + getNome() + " " + getTelefone() + " " + getTipo();
     }
     
 }

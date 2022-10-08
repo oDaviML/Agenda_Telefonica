@@ -5,6 +5,7 @@ public class Service {
     private Service() {}
 
     public static DTO AdicionarContato(String nome, String telefone, String tipo){
+        System.out.println("contato adicionado");
         return DAO.inserirContato(nome, telefone, tipo);
     }
 
