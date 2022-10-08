@@ -8,7 +8,7 @@ public class Service {
         return DAO.inserirContato(nome, telefone, tipo, email, rua, bairro);
     }
 
-    public static DTO removerContato(){
-        return null;
+    public static void removerContato(Integer codigo){
+        DAO.removerContato(codigo);
     }
 }
