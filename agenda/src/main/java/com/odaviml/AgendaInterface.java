@@ -135,11 +135,11 @@ public class AgendaInterface implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         tipoSelect.setValue("Celular");
         tipoSelect.getItems().addAll(tps);
-        nomeTabela.setCellFactory(TextFieldTableCell.forTableColumn());
+        contatosTabela.getSelectionModel().selectedItemProperty().addListener((Observable, oldValue, newValue) -> itemSelecionado(newValue));
     }
 
     public void itemSelecionado(DTO dto) {
-        System.out.println(dto.getCodigo());
+        codigo = dto.getCodigo();
     }
 
     public void carregarTabela() {
@@ -152,7 +152,6 @@ public class AgendaInterface implements Initializable {
         bairroTabela.setCellValueFactory(new PropertyValueFactory<>("bairro"));
 
         contatosTabela.setItems(DAO.getObservableListClientes());
-        contatosTabela.setOnMouseClicked(e -> itemSelecionado());
     }
 
     public void limpaInputs(){
