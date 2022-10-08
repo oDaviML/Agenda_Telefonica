@@ -1,24 +1,32 @@
 package com.odaviml;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class DAO extends DTO{
+public class DAO{
     
-    ArrayList<DTO> dtos = new ArrayList<>();   
-
-    private void AdicionarContato(Integer codigo, String nome, Integer telefone) {
-        DTO contato = new DTO(codigo, nome, telefone);
-        dtos.add(contato);
+    private static List<DTO> contatoLista;
+    private static int codigo;
+    static {
+        contatoLista = new ArrayList<>();
+        codigo = 1;
     }
 
-    private void RemoverContato(Integer codigo) {
-        if (dtos.contains(codigo)) {
-            dtos.remove(codigo);
+    public static DTO inserirContato(String nome, String telefone, String tipo) {
+        DTO contato = new DTO(codigo, nome, telefone, tipo);
+        contatoLista.add(contato);
+        codigo++;
+        return contato;
+    }
+
+    public void removerContato(Integer codigo) {
+        if (contatoLista.contains(codigo)) {
+            contatoLista.remove(codigo);
         }
         
     }
 
-    private void AtualizarContato(Integer cod) {
+    public void atualizarContato(Integer cod) {
         //A implementar
     }
 }
