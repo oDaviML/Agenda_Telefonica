@@ -10,7 +10,7 @@ public class DAO{
     
     private static ObservableList<DTO> observableListClientes;
     private static List<DTO> contatoLista;
-    private static int codigo;
+    private static Integer codigo;
     static {
         contatoLista = new ArrayList<>();
         codigo = 1;
@@ -24,18 +24,21 @@ public class DAO{
         return contato;
     }
 
-    public void removerContato(int codigo) {
-        if (contatoLista.contains(codigo)) {
-            contatoLista.remove(codigo);
+    public static void removerContato(Integer cdg) {
+        codigo = cdg;
+        contatoLista.removeIf(c -> c.getCodigo().equals(cdg));
+    }
+
+    public static DTO consultarPorNome(String nome) {
+        for (DTO c: contatoLista){
+            if (c.getNome().equals(nome)){
+                return c;
+            }
         }
-        
+        return null;
     }
 
     public static ObservableList<DTO> getObservableListClientes() {
         return observableListClientes;
-    }
-
-    public static List<DTO> getContatoLista() {
-        return contatoLista;
     }
 }
