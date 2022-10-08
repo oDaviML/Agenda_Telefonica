@@ -16,8 +16,8 @@ public class DAO{
         codigo = 1;
     }
 
-    public static DTO inserirContato(String nome, String telefone, String tipo) {
-        DTO contato = new DTO(codigo, nome, telefone, tipo);
+    public static DTO inserirContato(String nome, String telefone, String tipo, String email, String rua, String bairro) {
+        DTO contato = new DTO(codigo, nome, telefone, tipo, email, rua, bairro);
         contatoLista.add(contato);
         codigo++;
         observableListClientes = FXCollections.observableArrayList(contatoLista);
