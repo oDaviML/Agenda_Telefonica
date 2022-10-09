@@ -4,6 +4,8 @@ public class DTO {
     private String nome, telefone, tipo, email, rua, bairro;
     private Integer codigo;
 
+    public DTO () {}
+
     public DTO(Integer codigo, String nome, String telefone, String tipo, String email, String rua, String bairro) {
         this.codigo = codigo;
         this.nome = nome;
@@ -13,6 +15,9 @@ public class DTO {
         this.rua = rua;
         this.bairro = bairro;
     }
+
+    //////////////////////////////////////////////////////
+    // Setters
 
     public void setCodigo(Integer codigo) {
         this.codigo = codigo;
@@ -35,6 +40,9 @@ public class DTO {
     public void setRua(String rua) {
         this.rua = rua;
     }
+
+    //////////////////////////////////////////////////////
+    // Getters
 
     public Integer getCodigo() {
         return codigo;

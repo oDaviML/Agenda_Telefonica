@@ -23,15 +23,36 @@ public class DAO{
         observableListClientes = FXCollections.observableArrayList(contatoLista);
         return contato;
     }
-
+    static List<DTO> toRemove = new ArrayList();
     public static void removerContato(Integer cdg) {
-        codigo = cdg;
-        contatoLista.removeIf(c -> c.getCodigo().equals(cdg));
+        for (DTO c: contatoLista){
+            if (c.getCodigo().equals(cdg)){
+                toRemove.add(c);
+            }
+        }
+        contatoLista.removeAll(toRemove);
+        observableListClientes = FXCollections.observableArrayList(contatoLista);
+    }
+
+    public static void atualizarContato(String nomeAntigo ,String nome, String telefone, String tipo, String email, String rua, String bairro) {
+        removerContato(codigo);
+        DTO contato = new DTO(codigo, nome, telefone, tipo, email, rua, bairro);
+        contatoLista.add(contato);
+        observableListClientes = FXCollections.observableArrayList(contatoLista);
     }
 
     public static DTO consultarPorNome(String nome) {
         for (DTO c: contatoLista){
             if (c.getNome().equals(nome)){
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public static DTO consultaPorID(Integer codigo) {
+        for (DTO c: contatoLista){
+            if (c.getCodigo().equals(codigo)){
                 return c;
             }
         }

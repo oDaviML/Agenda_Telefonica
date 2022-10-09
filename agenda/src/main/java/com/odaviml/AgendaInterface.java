@@ -17,7 +17,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -95,7 +94,7 @@ public class AgendaInterface implements Initializable {
         
         if (nome.isEmpty() || numero.isEmpty()) {
             a.setAlertType(AlertType.WARNING);
-            a.setContentText("Campo Nome/Número não pode estar vazio");
+            a.setContentText("Campos Nome/Número não podem estar vazio");
             a.show();
         }
         else if (DAO.consultarPorNome(nome) != null) {
@@ -105,41 +104,41 @@ public class AgendaInterface implements Initializable {
             limpaInputs();
         }
         else {
-            Service.AdicionarContato(nome, numero, tipo, email, rua, bairro);
+            Service.adicionarContato(nome, numero, tipo, email, rua, bairro);
             carregarTabela();
             limpaInputs();
         }
     }
-
+    
     Integer codigo;
+    public Integer getRow() {
+        DTO dto = contatosTabela.getSelectionModel().getSelectedItem();
+        return codigo = dto.getCodigo();
+    }
+
     @FXML
     private void removerBTN() throws IOException {
-        contatosTabela.getItems().removeAll(contatosTabela.getSelectionModel().getSelectedItem());
-        Service.removerContato(codigo);
+        Service.removerContato(getRow());
         carregarTabela();
     }
 
+    
     @FXML
     private void editarBTN() throws IOException {
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(
         AgendaContatos.class.getResource("editar.fxml"));
+
         stage.setScene(new Scene(root));
         stage.setTitle("Editar");
         stage.setResizable(false);
         stage.initModality(Modality.WINDOW_MODAL);
-        stage.showAndWait();
+        stage.show();
     }
-
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         tipoSelect.setValue("Celular");
         tipoSelect.getItems().addAll(tps);
-        contatosTabela.getSelectionModel().selectedItemProperty().addListener((Observable, oldValue, newValue) -> itemSelecionado(newValue));
-    }
-
-    public void itemSelecionado(DTO dto) {
-        codigo = dto.getCodigo();
     }
 
     public void carregarTabela() {
