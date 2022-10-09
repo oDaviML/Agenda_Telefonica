@@ -12,11 +12,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Menu;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -43,6 +45,9 @@ public class AgendaInterface implements Initializable {
 
     //////////////////////////////////////////////////////////////////
     //Botões
+
+    @FXML
+    private Menu botaoF5;
 
     @FXML
     private Button removerBotao;
@@ -82,6 +87,12 @@ public class AgendaInterface implements Initializable {
 
     private String[] tps = {"Celular", "Comercial", "Casa"};
 
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        tipoSelect.setValue("Celular");
+        tipoSelect.getItems().addAll(tps);
+    }
+
     @FXML
     private void cadastrarBTN() throws IOException {
         String nome = nomeID.getText();
@@ -110,35 +121,28 @@ public class AgendaInterface implements Initializable {
         }
     }
     
-    Integer codigo;
-    public Integer getRow() {
-        DTO dto = contatosTabela.getSelectionModel().getSelectedItem();
-        return codigo = dto.getCodigo();
-    }
-
     @FXML
     private void removerBTN() throws IOException {
         Service.removerContato(getRow());
         carregarTabela();
     }
 
-    
     @FXML
     private void editarBTN() throws IOException {
         Stage stage = new Stage();
-        Parent root = FXMLLoader.load(
-        AgendaContatos.class.getResource("editar.fxml"));
-
+        Parent root = FXMLLoader.load(AgendaContatos.class.getResource("editar.fxml"));
+        stage.getIcons().add(new Image(AgendaContatos.class.getResourceAsStream("contato.png")));
         stage.setScene(new Scene(root));
         stage.setTitle("Editar");
         stage.setResizable(false);
         stage.initModality(Modality.WINDOW_MODAL);
-        stage.show();
+        stage.showAndWait();
     }
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-        tipoSelect.setValue("Celular");
-        tipoSelect.getItems().addAll(tps);
+
+    Integer codigo;
+    public Integer getRow() {
+        DTO dto = contatosTabela.getSelectionModel().getSelectedItem();
+        return codigo = dto.getCodigo();
     }
 
     public void carregarTabela() {
