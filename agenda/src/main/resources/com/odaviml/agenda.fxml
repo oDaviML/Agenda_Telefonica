@@ -19,12 +19,6 @@
    <children>
       <MenuBar>
         <menus>
-          <Menu mnemonicParsing="false" text="Buscar">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="ID" />
-                  <MenuItem mnemonicParsing="false" text="Nome" />
-                  <MenuItem mnemonicParsing="false" text="Email" />
-               </items></Menu>
             <Menu mnemonicParsing="false" text="Tipo">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
