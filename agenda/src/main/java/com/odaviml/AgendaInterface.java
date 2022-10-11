@@ -92,7 +92,7 @@ public class AgendaInterface implements Initializable {
         tipoSelect.setValue("Celular");
         tipoSelect.getItems().addAll(tps);
     }
-
+    Alert a = new Alert(AlertType.NONE);
     @FXML
     private void cadastrarBTN() throws IOException {
         String nome = nomeID.getText();
@@ -101,7 +101,7 @@ public class AgendaInterface implements Initializable {
         String email = emailID.getText();
         String rua = ruaID.getText();
         String bairro = bairroID.getText();
-        Alert a = new Alert(AlertType.NONE);
+        
         
         if (nome.isEmpty() || numero.isEmpty()) {
             a.setAlertType(AlertType.WARNING);
@@ -123,8 +123,15 @@ public class AgendaInterface implements Initializable {
     
     @FXML
     private void removerBTN() throws IOException {
-        Service.removerContato(getRow());
-        carregarTabela();
+        try {
+            Service.removerContato(getRow());
+            carregarTabela();
+        } catch (Exception e) {
+            a.setAlertType(AlertType.WARNING);
+            a.setContentText("Nenhum contato selecionado");
+            a.show();
+        }
+        
     }
 
     @FXML
@@ -137,6 +144,7 @@ public class AgendaInterface implements Initializable {
         stage.setResizable(false);
         stage.initModality(Modality.WINDOW_MODAL);
         stage.showAndWait();
+        
     }
 
     Integer codigo;

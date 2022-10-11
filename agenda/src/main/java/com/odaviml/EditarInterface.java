@@ -9,8 +9,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
 
 public class EditarInterface implements Initializable{
     @FXML
@@ -35,18 +38,22 @@ public class EditarInterface implements Initializable{
     private ChoiceBox<String> tipoID;
 
     @FXML
-    private TextField entradaID;
+    private Spinner<Integer> entradaID;
 
     private String[] tps = {"Celular", "Comercial", "Casa"};
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         tipoID.setValue("Celular");
         tipoID.getItems().addAll(tps);
+        Integer max = DAO.getCodigo();
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, max);
+            
+        entradaID.setValueFactory(valueFactory);
     }
 
     @FXML
     private void confirmaBTN() throws IOException  {
-        String idString = entradaID.getText();
+        Integer id = entradaID.getValue();
         String nome = nomeID.getText();
         String numero = numeroID.getText();
         String tipo = tipoID.getValue();
@@ -55,25 +62,20 @@ public class EditarInterface implements Initializable{
         String bairro = bairroID.getText();
         Alert a = new Alert(AlertType.NONE);
         
-        if (nome.isEmpty() || numero.isEmpty() || idString.isEmpty()) {
+        if (nome.isEmpty() || numero.isEmpty()) {
             a.setAlertType(AlertType.WARNING);
             a.setContentText("Campos Nome/Número/ID não podem estar vazio");
             a.show();
         }
-        else if (idString.substring(0).matches("[A-Z]*") || idString.substring(0).matches("[a-z]*")) {
-            a.setAlertType(AlertType.WARNING);
-            a.setContentText("Campo ID deve ser um número");
-            a.show();
-            limpaInputs();
-        }
-        Integer id = Integer.valueOf(idString);
-        if (DAO.consultaPorID(id) == null) {
+        else if (DAO.consultaPorID(id) == null) {
             a.setAlertType(AlertType.WARNING);
             a.setContentText("ID não cadastrado");
             a.show();
         }
         else {
             Service.editarContato(id, nome, numero, tipo, email, rua, bairro);
+            Stage stage = (Stage) confirmaBotao.getScene().getWindow();
+            stage.close();
         }
     }
 

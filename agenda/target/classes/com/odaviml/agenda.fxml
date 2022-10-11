@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -14,28 +15,44 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" prefHeight="541.0" prefWidth="741.0" spacing="20.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.odaviml.AgendaInterface">
+<VBox alignment="TOP_CENTER" prefHeight="633.0" prefWidth="797.0" spacing="20.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.odaviml.AgendaInterface">
    <children>
       <MenuBar>
         <menus>
-          <Menu mnemonicParsing="false" text="Buscar" />
+          <Menu mnemonicParsing="false" text="Buscar">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="ID" />
+                  <MenuItem mnemonicParsing="false" text="Nome" />
+                  <MenuItem mnemonicParsing="false" text="Email" />
+               </items></Menu>
+            <Menu mnemonicParsing="false" text="Tipo">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Grupo">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
         </menus>
       </MenuBar>
       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="336.0" prefWidth="640.0" style="-fx-background-color: #AAC4FF;">
          <children>
-            <TableView fx:id="contatosTabela" prefHeight="245.0" prefWidth="701.0">
+            <TableView fx:id="contatosTabela" prefHeight="291.0" prefWidth="757.0">
               <columns>
                 <TableColumn fx:id="chaveTabela" prefWidth="32.0" text="ID" />
-                <TableColumn fx:id="nomeTabela" prefWidth="109.0" text="Nome" />
-                  <TableColumn fx:id="numeroTabela" prefWidth="92.0" text="Telefone" />
-                  <TableColumn fx:id="tipoTabela" prefWidth="72.0" text="Tipo" />
-                  <TableColumn fx:id="emailTabela" prefWidth="191.0" text="Email" />
-                  <TableColumn prefWidth="204.0" text="Endereço">
+                <TableColumn fx:id="nomeTabela" prefWidth="115.0" text="Nome" />
+                  <TableColumn fx:id="numeroTabela" prefWidth="97.0" text="Telefone" />
+                  <TableColumn prefWidth="81.0" text="Grupo" />
+                  <TableColumn fx:id="emailTabela" prefWidth="201.0" text="Email" />
+                  <TableColumn prefWidth="253.0" text="Endereço">
                      <columns>
                         <TableColumn fx:id="ruaTabela" minWidth="6.0" prefWidth="133.0" text="Rua" />
-                        <TableColumn fx:id="bairroTabela" prefWidth="71.0" text="Bairro" />
+                        <TableColumn fx:id="bairroTabela" prefWidth="96.0" text="Bairro" />
                      </columns>
                   </TableColumn>
+                  <TableColumn fx:id="tipoTabela" prefWidth="64.0" text="Tipo" />
               </columns>
             </TableView>
          </children>
@@ -56,7 +73,7 @@
             </Label>
             <TextField fx:id="numeroID" layoutX="90.0" layoutY="51.0" promptText="*" />
             <ChoiceBox fx:id="tipoSelect" layoutX="65.0" layoutY="84.0" prefHeight="25.0" prefWidth="100.0" AnchorPane.topAnchor="84.0" />
-            <Button fx:id="removerBotao" alignment="BOTTOM_LEFT" layoutX="545.0" layoutY="130.0" onAction="#removerBTN" prefHeight="25.0" prefWidth="69.0" text="Remover">
+            <Button fx:id="removerBotao" alignment="BOTTOM_LEFT" layoutX="612.0" layoutY="176.0" onAction="#removerBTN" prefHeight="25.0" prefWidth="69.0" text="Remover">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
@@ -65,16 +82,16 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Button fx:id="botaoCadastrar" alignment="BOTTOM_LEFT" layoutX="458.0" layoutY="130.0" onAction="#cadastrarBTN" prefHeight="25.0" prefWidth="75.0" text="Cadastrar">
+            <Button fx:id="botaoCadastrar" alignment="BOTTOM_LEFT" layoutX="524.0" layoutY="176.0" onAction="#cadastrarBTN" prefHeight="25.0" prefWidth="75.0" text="Cadastrar">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
-            <Label layoutX="24.0" layoutY="122.0" prefHeight="25.0" prefWidth="59.0" text="Email:">
+            <Label layoutX="24.0" layoutY="160.0" prefHeight="25.0" prefWidth="59.0" text="Email:">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="emailID" layoutX="74.0" layoutY="122.0" prefHeight="25.0" prefWidth="225.0" />
+            <TextField fx:id="emailID" layoutX="74.0" layoutY="160.0" prefHeight="25.0" prefWidth="225.0" />
             <Label layoutX="402.0" layoutY="16.0" prefHeight="25.0" prefWidth="100.0" text="Endereço">
                <font>
                   <Font name="System Bold" size="15.0" />
@@ -92,11 +109,17 @@
                </font>
             </Label>
             <TextField fx:id="bairroID" layoutX="452.0" layoutY="84.0" prefHeight="25.0" prefWidth="93.0" />
-            <Button fx:id="editarBotao" layoutX="625.0" layoutY="130.0" mnemonicParsing="false" onAction="#editarBTN" text="Editar">
+            <Button fx:id="editarBotao" layoutX="693.0" layoutY="176.0" mnemonicParsing="false" onAction="#editarBTN" text="Editar">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
+            <Label layoutX="24.0" layoutY="121.0" prefHeight="25.0" prefWidth="59.0" text="Grupo:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <ChoiceBox layoutX="74.0" layoutY="121.0" prefHeight="25.0" prefWidth="111.0" />
          </children>
       </AnchorPane>
    </children>
