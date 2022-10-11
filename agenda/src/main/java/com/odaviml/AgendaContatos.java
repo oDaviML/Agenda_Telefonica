@@ -15,7 +15,7 @@ public class AgendaContatos extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("agenda"), 797, 633);
+        scene = new Scene(loadFXML("agenda"), 837, 633);
         stage.setScene(scene);
         stage.setTitle("Agenda Telefonica");
         stage.setResizable(false);
