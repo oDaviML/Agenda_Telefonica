@@ -35,7 +35,6 @@ public class DAO{
     }
 
     public static void atualizarContato(Integer codigo ,String nome, String telefone, String tipo, String email, String rua, String bairro) {
-        System.out.println("passou aki");
         for (DTO c: contatoLista){
             if (c.getCodigo().equals(codigo)){
                 c.setNome(nome);
@@ -65,6 +64,10 @@ public class DAO{
             }
         }
         return null;
+    }
+
+    public static Integer getCodigo() {
+        return codigo;
     }
 
     public static ObservableList<DTO> getObservableListClientes() {
