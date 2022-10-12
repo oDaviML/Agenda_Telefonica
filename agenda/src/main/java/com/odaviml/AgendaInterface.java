@@ -123,29 +123,36 @@ public class AgendaInterface implements Initializable {
     @FXML
     private void cadastrarBTN() throws IOException {
         String nome = nomeID.getText();
-        String numero = numeroID.getText();
-        String tipo = tipoSelect.getValue();
-        String email = emailID.getText();
-        String rua = ruaID.getText();
-        String bairro = bairroID.getText();
-        String grupo = grupoSelect.getValue();
-        
-        
-        if (nome.isEmpty() || numero.isEmpty()) {
+        String nmr = numeroID.getText();
+        try {
+            Integer numero = Integer.parseInt(nmr);
+            String tipo = tipoSelect.getValue();
+            String email = emailID.getText();
+            String rua = ruaID.getText();
+            String bairro = bairroID.getText();
+            String grupo = grupoSelect.getValue();
+            
+            
+            if (nome.isEmpty() || numero==null) {
+                a.setAlertType(AlertType.WARNING);
+                a.setContentText("Campos Nome/Número não podem estar vazio");
+                a.show();
+            }
+            else if (DAO.consultaPorNome(nome) != null) {
+                a.setAlertType(AlertType.WARNING);
+                a.setContentText("Contato ja cadastrado");
+                a.show();
+                limpaInputs();
+            }
+            else {
+                Service.adicionarContato(nome, numero, tipo, email, rua, bairro, grupo);
+                carregarTabela();
+                limpaInputs();
+            }
+        } catch (Exception e) {
             a.setAlertType(AlertType.WARNING);
-            a.setContentText("Campos Nome/Número não podem estar vazio");
+            a.setContentText("Número não pode conter letras");
             a.show();
-        }
-        else if (DAO.consultaPorNome(nome) != null) {
-            a.setAlertType(AlertType.WARNING);
-            a.setContentText("Contato ja cadastrado");
-            a.show();
-            limpaInputs();
-        }
-        else {
-            Service.adicionarContato(nome, numero, tipo, email, rua, bairro, grupo);
-            carregarTabela();
-            limpaInputs();
         }
     }
     
@@ -195,6 +202,16 @@ public class AgendaInterface implements Initializable {
                     try {
                         Integer id = Integer.parseInt(buscaInput);
                         consulta = Service.consultaPorID(id);
+                        if (consulta == null) {
+                            a.setAlertType(AlertType.WARNING);
+                            a.setContentText("ID não encontrado");
+                            a.show();
+                        }
+                        else {
+                            a.setAlertType(AlertType.INFORMATION);
+                            a.setContentText(textoConsulta(consulta));
+                            a.show();
+                        }
                         a.setAlertType(AlertType.INFORMATION);
                         a.setContentText(textoConsulta(consulta));
                         a.show();
@@ -219,15 +236,22 @@ public class AgendaInterface implements Initializable {
                     
                     break;
                 case "Número":
-                    consulta = Service.consultaPorTelefone(buscaInput);
-                    if (consulta == null) {
+                    try {
+                        Integer telefone = Integer.parseInt(buscaInput);
+                        consulta = Service.consultaPorTelefone(telefone);
+                        if (consulta == null) {
+                            a.setAlertType(AlertType.WARNING);
+                            a.setContentText("Telefone não encontrado");
+                            a.show();
+                        }
+                        else {
+                            a.setAlertType(AlertType.INFORMATION);
+                            a.setContentText(textoConsulta(consulta));
+                            a.show();
+                        }
+                    } catch (Exception e) {
                         a.setAlertType(AlertType.WARNING);
-                        a.setContentText("Telefone não encontrado");
-                        a.show();
-                    }
-                    else {
-                        a.setAlertType(AlertType.INFORMATION);
-                        a.setContentText(textoConsulta(consulta));
+                        a.setContentText("Telefone deve ser um número");
                         a.show();
                     }
                     break;
@@ -250,8 +274,8 @@ public class AgendaInterface implements Initializable {
     }
 
     private String textoConsulta (DTO consulta) {
-        String nome, numero, tipo, grupo, email;
-        Integer ID;
+        String nome, tipo, grupo, email;
+        Integer ID, numero;
         ID = consulta.getCodigo();
         nome = consulta.getNome();
         numero = consulta.getTelefone();

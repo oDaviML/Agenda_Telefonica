@@ -4,7 +4,7 @@ public class Service {
 
     private Service() {}
 
-    public static DTO adicionarContato(String nome, String telefone, String tipo, String email, String rua, String bairro, String grupo){
+    public static DTO adicionarContato(String nome, Integer telefone, String tipo, String email, String rua, String bairro, String grupo){
         return DAO.inserirContato(nome, telefone, tipo, email, rua, bairro, grupo);
     }
 
@@ -12,7 +12,7 @@ public class Service {
         DAO.removerContato(codigo);
     }
 
-    public static void editarContato(Integer codigo ,String nome, String telefone, String tipo, String email, String rua, String bairro, String grupo) {
+    public static void editarContato(Integer codigo ,String nome, Integer telefone, String tipo, String email, String rua, String bairro, String grupo) {
         DAO.atualizarContato(codigo, nome, telefone, tipo, email, rua, bairro, grupo);
     }
 
@@ -22,7 +22,7 @@ public class Service {
     public static DTO consultaPorNome(String nome) {
         return DAO.consultaPorNome(nome);
     }
-    public static DTO consultaPorTelefone(String telefone) {
+    public static DTO consultaPorTelefone(Integer telefone) {
         return DAO.consultaPorNumero(telefone);
     }
 }

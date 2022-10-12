@@ -55,34 +55,42 @@ public class EditarInterface implements Initializable{
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, max);
         entradaID.setValueFactory(valueFactory);
     }
-
+    Alert a = new Alert(AlertType.NONE);
     @FXML
     private void confirmaBTN() throws IOException  {
         Integer id = entradaID.getValue();
         String nome = nomeID.getText();
-        String numero = numeroID.getText();
-        String tipo = tipoID.getValue();
-        String email = emailID.getText();
-        String rua = ruaID.getText();
-        String bairro = bairroID.getText();
-        String grupo = grupoSelect.getValue();
+        String nmr = numeroID.getText();
+        try {
+            Integer numero = Integer.parseInt(nmr);
+            String tipo = tipoID.getValue();
+            String email = emailID.getText();
+            String rua = ruaID.getText();
+            String bairro = bairroID.getText();
+            String grupo = grupoSelect.getValue();
+            
+            
+            if (nome.isEmpty() || numero== null) {
+                a.setAlertType(AlertType.WARNING);
+                a.setContentText("Campos Nome/Número/ID não podem estar vazio");
+                a.show();
+            }
+            else if (DAO.consultaPorID(id) == null) {
+                a.setAlertType(AlertType.WARNING);
+                a.setContentText("ID não cadastrado");
+                a.show();
+            }
+            else {
+                Service.editarContato(id, nome, numero, tipo, email, rua, bairro, grupo);
+                Stage stage = (Stage) confirmaBotao.getScene().getWindow();
+                stage.close();
+            }
+        } catch (Exception e) {
+            a.setAlertType(AlertType.WARNING);
+            a.setContentText("Número não pode conter letras");
+            a.show();
+        }
         
-        Alert a = new Alert(AlertType.NONE);
-        if (nome.isEmpty() || numero.isEmpty()) {
-            a.setAlertType(AlertType.WARNING);
-            a.setContentText("Campos Nome/Número/ID não podem estar vazio");
-            a.show();
-        }
-        else if (DAO.consultaPorID(id) == null) {
-            a.setAlertType(AlertType.WARNING);
-            a.setContentText("ID não cadastrado");
-            a.show();
-        }
-        else {
-            Service.editarContato(id, nome, numero, tipo, email, rua, bairro, grupo);
-            Stage stage = (Stage) confirmaBotao.getScene().getWindow();
-            stage.close();
-        }
     }
 
     public void limpaInputs(){
