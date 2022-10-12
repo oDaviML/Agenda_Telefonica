@@ -39,7 +39,7 @@ public class DAO{
         observableListClientes = FXCollections.observableArrayList(contatoLista);
     }
 
-    public static void atualizarContato(Integer codigo ,String nome, Integer telefone, String tipo, String email, String rua, String bairro, String grupo) {
+    public static void atualizarContato(Integer codigo, String nome, Integer telefone, String tipo, String email, String rua, String bairro, String grupo) {
         for (DTO c: contatoLista){
             if (c.getCodigo().equals(codigo)){
                 c.setNome(nome);

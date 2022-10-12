@@ -20,14 +20,14 @@
       <MenuBar>
         <menus>
             <Menu mnemonicParsing="false" text="Tipo">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-              </items>
+               <items>
+                  <MenuItem fx:id="tipoBotao" mnemonicParsing="false" onAction="#interfaceTipo" text="Abrir" />
+               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Grupo">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-              </items>
+            <Menu fx:id="grupoBotao" mnemonicParsing="false" text="Grupo">
+               <items>
+                  <MenuItem fx:id="grupoBotao" mnemonicParsing="false" onAction="#interfaceGrupo" text="Abrir" />
+               </items>
             </Menu>
         </menus>
       </MenuBar>

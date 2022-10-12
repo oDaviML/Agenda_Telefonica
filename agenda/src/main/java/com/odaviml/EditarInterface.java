@@ -55,12 +55,12 @@ public class EditarInterface implements Initializable{
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, max);
         entradaID.setValueFactory(valueFactory);
     }
-    Alert a = new Alert(AlertType.NONE);
     @FXML
     private void confirmaBTN() throws IOException  {
         Integer id = entradaID.getValue();
         String nome = nomeID.getText();
         String nmr = numeroID.getText();
+        Alert a = new Alert(AlertType.NONE);
         try {
             Integer numero = Integer.parseInt(nmr);
             String tipo = tipoID.getValue();
@@ -69,8 +69,7 @@ public class EditarInterface implements Initializable{
             String bairro = bairroID.getText();
             String grupo = grupoSelect.getValue();
             
-            
-            if (nome.isEmpty() || numero== null) {
+            if (nome.isEmpty() || numero == null) {
                 a.setAlertType(AlertType.WARNING);
                 a.setContentText("Campos Nome/Número/ID não podem estar vazio");
                 a.show();
@@ -79,6 +78,13 @@ public class EditarInterface implements Initializable{
                 a.setAlertType(AlertType.WARNING);
                 a.setContentText("ID não cadastrado");
                 a.show();
+                limpaInputs();
+            }
+            else if (DAO.consultaPorNome(nome) != null) {
+                a.setAlertType(AlertType.WARNING);
+                a.setContentText("Contato ja cadastrado");
+                a.show();
+                limpaInputs();
             }
             else {
                 Service.editarContato(id, nome, numero, tipo, email, rua, bairro, grupo);
