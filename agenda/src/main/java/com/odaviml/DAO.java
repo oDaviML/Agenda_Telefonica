@@ -54,7 +54,7 @@ public class DAO{
         observableListClientes = FXCollections.observableArrayList(contatoLista);
     }
 
-    public static DTO consultarPorNome(String nome) {
+    public static DTO consultaPorNome(String nome) {
         for (DTO c: contatoLista){
             if (c.getNome().equals(nome)){
                 return c;
@@ -66,6 +66,15 @@ public class DAO{
     public static DTO consultaPorID(Integer codigo) {
         for (DTO c: contatoLista){
             if (c.getCodigo().equals(codigo)){
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public static DTO consultaPorNumero(String telefone) {
+        for (DTO c: contatoLista){
+            if (c.getTelefone().equals(telefone)){
                 return c;
             }
         }

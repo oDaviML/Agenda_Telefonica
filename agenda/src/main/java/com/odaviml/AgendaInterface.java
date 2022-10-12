@@ -136,7 +136,7 @@ public class AgendaInterface implements Initializable {
             a.setContentText("Campos Nome/Número não podem estar vazio");
             a.show();
         }
-        else if (DAO.consultarPorNome(nome) != null) {
+        else if (DAO.consultaPorNome(nome) != null) {
             a.setAlertType(AlertType.WARNING);
             a.setContentText("Contato ja cadastrado");
             a.show();
@@ -183,21 +183,57 @@ public class AgendaInterface implements Initializable {
     private void buscarBTN() throws IOException {
         String buscaInput = buscarInput.getText();
         String buscaSelect = buscarSelect.getValue();
-
-        switch (buscaSelect) {
-            case "ID":
-                
-                break;
-            case "Nome":
-                
-                break;
-            case "Número":
-            
-                break;
+        DTO consulta;
+        if (buscaInput.isEmpty()) {
+            a.setAlertType(AlertType.WARNING);
+            a.setContentText("Campo não pode estar vazio");
+            a.show();
         }
-        a.setAlertType(AlertType.CONFIRMATION);
-        a.setContentText("Campos Nome/Número não podem estar vazio " + buscaInput + " " + buscaSelect);
-        a.show();
+        else {
+            switch (buscaSelect) {
+                case "ID":
+                    try {
+                        Integer id = Integer.parseInt(buscaInput);
+                        consulta = Service.consultaPorID(id);
+                        a.setAlertType(AlertType.INFORMATION);
+                        a.setContentText(textoConsulta(consulta));
+                        a.show();
+                    } catch (Exception e) {
+                        a.setAlertType(AlertType.WARNING);
+                        a.setContentText("ID deve ser um número");
+                        a.show();
+                    }
+                    break;
+                case "Nome":
+                    consulta = Service.consultaPorNome(buscaInput);
+                    if (consulta == null) {
+                        a.setAlertType(AlertType.WARNING);
+                        a.setContentText("Nome não encontrado");
+                        a.show();
+                    }
+                    else {
+                        a.setAlertType(AlertType.INFORMATION);
+                        a.setContentText(textoConsulta(consulta));
+                        a.show();
+                    }
+                    
+                    break;
+                case "Número":
+                    consulta = Service.consultaPorTelefone(buscaInput);
+                    if (consulta == null) {
+                        a.setAlertType(AlertType.WARNING);
+                        a.setContentText("Telefone não encontrado");
+                        a.show();
+                    }
+                    else {
+                        a.setAlertType(AlertType.INFORMATION);
+                        a.setContentText(textoConsulta(consulta));
+                        a.show();
+                    }
+                    break;
+            }
+        }
+        
     }
 
     public void carregarTabela() {
@@ -213,6 +249,19 @@ public class AgendaInterface implements Initializable {
         contatosTabela.setItems(DAO.getObservableListClientes());
     }
 
+    private String textoConsulta (DTO consulta) {
+        String nome, numero, tipo, grupo, email;
+        Integer ID;
+        ID = consulta.getCodigo();
+        nome = consulta.getNome();
+        numero = consulta.getTelefone();
+        email = consulta.getEmail();
+        tipo = consulta.getTipo();
+        grupo = consulta.getGrupo();
+        String textoconsultaString = "ID: " + ID + "\nNome: " + nome + "\nNúmero: " + numero + "\nEmail: " + email+ "\nTipo: " + tipo + "\nGrupo: " + grupo;
+        return textoconsultaString;
+    }
+
     public void limpaInputs(){
         nomeID.setText("");
         numeroID.setText("");
@@ -220,5 +269,4 @@ public class AgendaInterface implements Initializable {
         ruaID.setText("");
         bairroID.setText("");
     }
-    
 }
