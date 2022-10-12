@@ -9,16 +9,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="488.0" prefWidth="279.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.odaviml.EditarInterface">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="533.0" prefWidth="279.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.odaviml.EditarInterface">
    <children>
-      <AnchorPane prefHeight="485.0" prefWidth="279.0">
+      <AnchorPane prefHeight="535.0" prefWidth="279.0">
          <children>
             <Label layoutX="121.0" layoutY="62.0" text="Nome">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Button fx:id="confirmaBotao" layoutX="210.0" layoutY="450.0" mnemonicParsing="false" onAction="#confirmaBTN" prefHeight="25.0" prefWidth="55.0" text="OK" />
             <TextField fx:id="nomeID" layoutX="65.0" layoutY="92.0" />
             <Label layoutX="115.0" layoutY="126.0" text="Número">
                <font>
@@ -26,29 +25,29 @@
                </font>
             </Label>
             <TextField fx:id="numeroID" layoutX="65.0" layoutY="145.0" />
-            <Label layoutX="126.0" layoutY="182.0" text="Tipo">
+            <Label layoutX="125.0" layoutY="182.0" text="Tipo">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="123.0" layoutY="243.0" text="Email">
+            <Label layoutX="123.0" layoutY="305.0" text="Email">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="emailID" layoutX="65.0" layoutY="271.0" />
-            <Label layoutX="129.0" layoutY="308.0" text="Rua">
+            <TextField fx:id="emailID" layoutX="65.0" layoutY="331.0" />
+            <Label layoutX="129.0" layoutY="367.0" text="Rua">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="ruaID" layoutX="65.0" layoutY="334.0" />
-            <Label layoutX="122.0" layoutY="377.0" text="Bairro">
+            <TextField fx:id="ruaID" layoutX="67.0" layoutY="392.0" />
+            <Label layoutX="122.0" layoutY="427.0" text="Bairro">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="bairroID" layoutX="65.0" layoutY="405.0" />
+            <TextField fx:id="bairroID" layoutX="65.0" layoutY="455.0" />
             <ChoiceBox fx:id="tipoID" layoutX="65.0" layoutY="201.0" prefWidth="150.0" />
             <Label layoutX="132.0" layoutY="14.0" text="ID">
                <font>
@@ -56,6 +55,13 @@
                </font>
             </Label>
             <Spinner fx:id="entradaID" layoutX="109.0" layoutY="33.0" prefHeight="25.0" prefWidth="61.0" />
+            <Label layoutX="119.0" layoutY="242.0" prefHeight="25.0" prefWidth="44.0" text="Grupo">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="grupoSelect" layoutX="85.0" layoutY="267.0" prefHeight="25.0" prefWidth="111.0" />
+            <Button fx:id="confirmaBotao" layoutX="215.0" layoutY="494.0" mnemonicParsing="false" onAction="#confirmaBTN" prefHeight="25.0" prefWidth="55.0" text="OK" />
          </children>
       </AnchorPane>
    </children>

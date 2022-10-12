@@ -16,8 +16,11 @@ public class DAO{
         codigo = 1;
     }
 
-    public static DTO inserirContato(String nome, String telefone, String tipo, String email, String rua, String bairro) {
-        DTO contato = new DTO(codigo, nome, telefone, tipo, email, rua, bairro);
+    public static DTO inserirContato(String nome, String telefone, String tipo, String email, String rua, String bairro, String grupo) {
+        while (consultaPorID(codigo)!= null) {
+            codigo++;
+        }
+        DTO contato = new DTO(codigo, nome, telefone, tipo, email, rua, bairro, grupo);
         contatoLista.add(contato);
         codigo++;
         observableListClientes = FXCollections.observableArrayList(contatoLista);
@@ -28,13 +31,15 @@ public class DAO{
         for (DTO c: contatoLista){
             if (c.getCodigo().equals(cdg)){
                 toRemove.add(c);
+                codigo = c.getCodigo();
             }
         }
+
         contatoLista.removeAll(toRemove);
         observableListClientes = FXCollections.observableArrayList(contatoLista);
     }
 
-    public static void atualizarContato(Integer codigo ,String nome, String telefone, String tipo, String email, String rua, String bairro) {
+    public static void atualizarContato(Integer codigo ,String nome, String telefone, String tipo, String email, String rua, String bairro, String grupo) {
         for (DTO c: contatoLista){
             if (c.getCodigo().equals(codigo)){
                 c.setNome(nome);
@@ -43,6 +48,7 @@ public class DAO{
                 c.setEmail(email);
                 c.setRua(rua);
                 c.setBairro(bairro);
+                c.setGrupo(grupo);
             }
         }
         observableListClientes = FXCollections.observableArrayList(contatoLista);

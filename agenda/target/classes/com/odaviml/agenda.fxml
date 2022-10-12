@@ -39,7 +39,7 @@
                 <TableColumn fx:id="nomeTabela" prefWidth="115.0" text="Nome" />
                   <TableColumn fx:id="numeroTabela" prefWidth="97.0" text="Telefone" />
                   <TableColumn fx:id="tipoTabela" prefWidth="64.0" text="Tipo" />
-                  <TableColumn prefWidth="81.0" text="Grupo" />
+                  <TableColumn fx:id="grupoTabela" prefWidth="81.0" text="Grupo" />
                   <TableColumn fx:id="emailTabela" prefWidth="201.0" text="Email" />
                   <TableColumn prefWidth="206.0" text="Endereço">
                      <columns>
@@ -113,14 +113,14 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <ChoiceBox layoutX="74.0" layoutY="164.0" prefHeight="25.0" prefWidth="111.0" />
-            <TextField layoutX="567.0" layoutY="140.0" prefHeight="25.0" prefWidth="149.0" />
-            <Button layoutX="724.0" layoutY="139.0" mnemonicParsing="false" text="Buscar">
+            <ChoiceBox fx:id="grupoSelect" layoutX="74.0" layoutY="164.0" prefHeight="25.0" prefWidth="111.0" />
+            <TextField fx:id="buscarInput" layoutX="567.0" layoutY="140.0" prefHeight="25.0" prefWidth="149.0" />
+            <Button fx:id="buscarBTN" layoutX="724.0" layoutY="139.0" mnemonicParsing="false" onAction="#buscarBTN" text="Buscar">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <ChoiceBox layoutX="487.0" layoutY="140.0" prefHeight="25.0" prefWidth="69.0" />
+            <ChoiceBox fx:id="buscarSelect" layoutX="487.0" layoutY="140.0" prefHeight="25.0" prefWidth="69.0" />
          </children>
       </AnchorPane>
    </children>

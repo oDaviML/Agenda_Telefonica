@@ -38,16 +38,21 @@ public class EditarInterface implements Initializable{
     private ChoiceBox<String> tipoID;
 
     @FXML
+    private ChoiceBox<String> grupoSelect;;
+
+    @FXML
     private Spinner<Integer> entradaID;
 
     private String[] tps = {"Celular", "Comercial", "Casa"};
+    private String[] grps = {"Família", "Trabalho", "Escola"};
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         tipoID.setValue("Celular");
         tipoID.getItems().addAll(tps);
+        grupoSelect.setValue("Família");
+        grupoSelect.getItems().addAll(grps);
         Integer max = DAO.getCodigo();
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, max);
-            
         entradaID.setValueFactory(valueFactory);
     }
 
@@ -60,8 +65,9 @@ public class EditarInterface implements Initializable{
         String email = emailID.getText();
         String rua = ruaID.getText();
         String bairro = bairroID.getText();
-        Alert a = new Alert(AlertType.NONE);
+        String grupo = grupoSelect.getValue();
         
+        Alert a = new Alert(AlertType.NONE);
         if (nome.isEmpty() || numero.isEmpty()) {
             a.setAlertType(AlertType.WARNING);
             a.setContentText("Campos Nome/Número/ID não podem estar vazio");
@@ -73,7 +79,7 @@ public class EditarInterface implements Initializable{
             a.show();
         }
         else {
-            Service.editarContato(id, nome, numero, tipo, email, rua, bairro);
+            Service.editarContato(id, nome, numero, tipo, email, rua, bairro, grupo);
             Stage stage = (Stage) confirmaBotao.getScene().getWindow();
             stage.close();
         }

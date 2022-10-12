@@ -41,8 +41,16 @@ public class AgendaInterface implements Initializable {
     private TextField ruaID;
 
     @FXML
+    private TextField buscarInput;
+
+    @FXML
+    private ChoiceBox<String> buscarSelect;
+
+    @FXML
     private ChoiceBox<String> tipoSelect;;
 
+    @FXML
+    private ChoiceBox<String> grupoSelect;
     //////////////////////////////////////////////////////////////////
     //Botões
 
@@ -57,6 +65,10 @@ public class AgendaInterface implements Initializable {
 
     @FXML
     private Button editarBotao;
+
+    @FXML
+    private Button buscarBTN;
+
     //////////////////////////////////////////////////////////////////
     //  Tabela
     @FXML
@@ -82,17 +94,32 @@ public class AgendaInterface implements Initializable {
 
     @FXML
     private TableColumn<DTO, String> bairroTabela;
+
+    @FXML
+    private TableColumn<DTO, String> grupoTabela;
     //
     //////////////////////////////////////////////////////////////////
 
     private String[] tps = {"Celular", "Comercial", "Casa"};
+    private String[] grps = {"Família", "Trabalho", "Escola"};
+    private String[] buscarSelStrings = {"ID", "Nome", "Número"};
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         tipoSelect.setValue("Celular");
         tipoSelect.getItems().addAll(tps);
+
+        grupoSelect.setValue("Família");
+        grupoSelect.getItems().addAll(grps);
+
+        buscarSelect.setValue("ID");
+        buscarSelect.getItems().addAll(buscarSelStrings);
+
+        carregarTabela();
     }
+
     Alert a = new Alert(AlertType.NONE);
+
     @FXML
     private void cadastrarBTN() throws IOException {
         String nome = nomeID.getText();
@@ -101,6 +128,7 @@ public class AgendaInterface implements Initializable {
         String email = emailID.getText();
         String rua = ruaID.getText();
         String bairro = bairroID.getText();
+        String grupo = grupoSelect.getValue();
         
         
         if (nome.isEmpty() || numero.isEmpty()) {
@@ -115,7 +143,7 @@ public class AgendaInterface implements Initializable {
             limpaInputs();
         }
         else {
-            Service.adicionarContato(nome, numero, tipo, email, rua, bairro);
+            Service.adicionarContato(nome, numero, tipo, email, rua, bairro, grupo);
             carregarTabela();
             limpaInputs();
         }
@@ -131,7 +159,6 @@ public class AgendaInterface implements Initializable {
             a.setContentText("Nenhum contato selecionado");
             a.show();
         }
-        
     }
 
     @FXML
@@ -144,13 +171,33 @@ public class AgendaInterface implements Initializable {
         stage.setResizable(false);
         stage.initModality(Modality.WINDOW_MODAL);
         stage.showAndWait();
-        
     }
 
     Integer codigo;
     public Integer getRow() {
         DTO dto = contatosTabela.getSelectionModel().getSelectedItem();
         return codigo = dto.getCodigo();
+    }
+
+    @FXML
+    private void buscarBTN() throws IOException {
+        String buscaInput = buscarInput.getText();
+        String buscaSelect = buscarSelect.getValue();
+
+        switch (buscaSelect) {
+            case "ID":
+                
+                break;
+            case "Nome":
+                
+                break;
+            case "Número":
+            
+                break;
+        }
+        a.setAlertType(AlertType.CONFIRMATION);
+        a.setContentText("Campos Nome/Número não podem estar vazio " + buscaInput + " " + buscaSelect);
+        a.show();
     }
 
     public void carregarTabela() {
@@ -161,6 +208,7 @@ public class AgendaInterface implements Initializable {
         emailTabela.setCellValueFactory(new PropertyValueFactory<>("email"));
         ruaTabela.setCellValueFactory(new PropertyValueFactory<>("rua"));
         bairroTabela.setCellValueFactory(new PropertyValueFactory<>("bairro"));
+        grupoTabela.setCellValueFactory(new PropertyValueFactory<>("grupo"));
 
         contatosTabela.setItems(DAO.getObservableListClientes());
     }
