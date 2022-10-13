@@ -133,7 +133,7 @@ public class AgendaInterface implements Initializable {
             String bairro = bairroID.getText();
             String grupo = grupoSelect.getValue();
 
-            Integer numero = Integer.parseInt(nmr);
+            Long numero = Long.parseLong(nmr);
             
             if (nome.isEmpty() || numero==null) {
                 a.setAlertType(AlertType.WARNING);
@@ -234,7 +234,7 @@ public class AgendaInterface implements Initializable {
                     break;
                 case "Número":
                     try {
-                        Integer telefone = Integer.parseInt(buscaInput);
+                        Long telefone = Long.parseLong(buscaInput);
                         consulta = Service.consultaPorTelefone(telefone);
                         if (consulta == null) {
                             a.setAlertType(AlertType.WARNING);
@@ -309,7 +309,8 @@ public class AgendaInterface implements Initializable {
 
     private String textoConsulta (DTO consulta) {
         String nome, tipo, grupo, email;
-        Integer ID, numero;
+        Integer ID;
+        Long numero;
         ID = consulta.getCodigo();
         nome = consulta.getNome();
         numero = consulta.getTelefone();

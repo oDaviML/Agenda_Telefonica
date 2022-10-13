@@ -2,11 +2,12 @@ package com.odaviml;
 
 public class DTO {
     private String nome, tipo, email, rua, bairro, grupo;
-    private Integer codigo, telefone;
+    private Integer codigo;
+    private Long telefone;
 
     public DTO () {}
 
-    public DTO(Integer codigo, String nome, Integer telefone, String tipo, String email, String rua, String bairro, String grupo) {
+    public DTO(Integer codigo, String nome, Long telefone, String tipo, String email, String rua, String bairro, String grupo) {
         this.codigo = codigo;
         this.nome = nome;
         this.telefone = telefone;
@@ -26,7 +27,7 @@ public class DTO {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public void setTelefone(Integer telefone) {
+    public void setTelefone(Long telefone) {
         this.telefone = telefone;
     }
     public void setTipo(String tipo) {
@@ -54,7 +55,7 @@ public class DTO {
     public String getNome() {
         return nome;
     }
-    public Integer getTelefone() {
+    public Long getTelefone() {
         return telefone;
     }
     public String getTipo() {

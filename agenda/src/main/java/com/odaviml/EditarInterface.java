@@ -62,7 +62,7 @@ public class EditarInterface implements Initializable{
         String nmr = numeroID.getText();
         Alert a = new Alert(AlertType.NONE);
         try {
-            Integer numero = Integer.parseInt(nmr);
+            Long numero = Long.parseLong(nmr);
             String tipo = tipoID.getValue();
             String email = emailID.getText();
             String rua = ruaID.getText();

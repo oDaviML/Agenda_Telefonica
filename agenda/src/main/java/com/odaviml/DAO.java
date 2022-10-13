@@ -16,7 +16,7 @@ public class DAO{
         codigo = 1;
     }
 
-    public static DTO inserirContato(String nome, Integer telefone, String tipo, String email, String rua, String bairro, String grupo) {
+    public static DTO inserirContato(String nome, Long telefone, String tipo, String email, String rua, String bairro, String grupo) {
         while (consultaPorID(codigo)!= null) {
             codigo++;
         }
@@ -39,7 +39,7 @@ public class DAO{
         observableListClientes = FXCollections.observableArrayList(contatoLista);
     }
 
-    public static void atualizarContato(Integer codigo, String nome, Integer telefone, String tipo, String email, String rua, String bairro, String grupo) {
+    public static void atualizarContato(Integer codigo, String nome, Long telefone, String tipo, String email, String rua, String bairro, String grupo) {
         for (DTO c: contatoLista){
             if (c.getCodigo().equals(codigo)){
                 c.setNome(nome);
@@ -72,7 +72,7 @@ public class DAO{
         return null;
     }
 
-    public static DTO consultaPorNumero(Integer telefone) {
+    public static DTO consultaPorNumero(Long telefone) {
         for (DTO c: contatoLista){
             if (c.getTelefone().equals(telefone)){
                 return c;

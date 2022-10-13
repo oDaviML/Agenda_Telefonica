@@ -9,7 +9,7 @@ public class Service {
 
     ////////////////////////////////////////////////////////////////////////////////
     // DAO E DTO Contatos
-    public static DTO adicionarContato(String nome, Integer telefone, String tipo, String email, String rua, String bairro, String grupo){
+    public static DTO adicionarContato(String nome, Long telefone, String tipo, String email, String rua, String bairro, String grupo){
         return DAO.inserirContato(nome, telefone, tipo, email, rua, bairro, grupo);
     }
 
@@ -17,7 +17,7 @@ public class Service {
         DAO.removerContato(codigo);
     }
 
-    public static void editarContato(Integer codigo ,String nome, Integer telefone, String tipo, String email, String rua, String bairro, String grupo) {
+    public static void editarContato(Integer codigo ,String nome, Long telefone, String tipo, String email, String rua, String bairro, String grupo) {
         DAO.atualizarContato(codigo, nome, telefone, tipo, email, rua, bairro, grupo);
     }
 
@@ -29,7 +29,7 @@ public class Service {
         return DAO.consultaPorNome(nome);
     }
 
-    public static DTO consultaPorTelefone(Integer telefone) {
+    public static DTO consultaPorTelefone(Long telefone) {
         return DAO.consultaPorNumero(telefone);
     }
 
